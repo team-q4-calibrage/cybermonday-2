@@ -1,0 +1,13 @@
+import { useEffect, useState } from 'react'
+
+// Current time, refreshed every `interval` ms.
+export default function useNow(interval = 1000) {
+  const [now, setNow] = useState(() => new Date())
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), interval)
+    return () => clearInterval(id)
+  }, [interval])
+
+  return now
+}
